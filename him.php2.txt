@@ -1,0 +1,61 @@
+
+Enrollment No.:E19110192000310024
+Name:Himanshu jha
+Subject:PHP
+Class:T.Y.C.S 		Div-A		Sem-6
+Assigment No.:2
+Date:24/01/2022
+ */
+
+class product {
+	public $productname = "milk";
+	public $stock       = 50;
+	function disp_prod() {
+		echo "<br>========Product details in parent class========";
+		echo "<br>Product Name:".$this->productname;
+		echo "<br>Stock:".$this->stock;
+	}
+}
+class hybrid_prod extends product {
+	public $hybrid_prodname = "milk1";
+	public $hybrid_price    = 100;
+	public $hybrid_qty      = 10;
+	function disp_hybrid() {
+		echo "<br>========Product details in hybrid class========";
+		echo "<br>Hybrid Product Name:".$this->hybrid_prodname;
+		echo "<br>Hybrid Product Price :".$this->hybrid_price;
+		echo "<br>Hybrid Product Quantity :".$this->hybrid_qty;
+	}
+	function hybrid_sale($sellqty) {
+		$this->stock -= $sellqty;
+		$this->hybrid_qty -= $sellqty;
+		echo "<br><br><br>".$sellqty." products sold!!!!!!";
+	}
+	function final_data() {
+		echo "<br>==============Product details============";
+		echo "<br>Product Name:".$this->productname;
+		echo "<br>Final Stock after sale:".$this->stock;
+		echo "<br>Hybrid Product Name:".$this->hybrid_prodname;
+		echo "<br>Hybrid Product Price:".$this->hybrid_price;
+		echo "<br>Hybrid quantity after sale:".$this->hybrid_qty;
+	}
+}
+function ip() {
+	echo "<form method='post'>";
+	echo "<lable for='qty'>Quantity:</label>";
+	echo "<input type='number' name='sell_qty'>";
+	echo "<br><input type='submit' name='purchase' value='Purchase'>";
+	echo "</form>";
+	if (isset($_POST['purchase'])) {
+		$ip_qty  = $_POST['sell_qty'];
+		$obj1_hp = new hybrid_prod();
+		$obj1_hp->disp_prod();
+		$obj1_hp->disp_hybrid();
+		$obj1_hp->hybrid_sale($ip_qty);
+		$obj1_hp->final_data();
+	}
+	//return $ip_qty;
+
+}
+ip();
+?>
